@@ -1,0 +1,23 @@
+@(productForm: Form[Product])
+
+@import helper.Implicits._
+@import b4.vertical.fieldConstructor
+
+@main("Product form"){
+<h1>Product form</h1>
+		
+@*Here implements a CSRF certificate
+*@
+@b4.form(action=helper.CSRF(routes.Products.save())){
+	<fieldset>
+<legend>Product (@productForm("name").getValue())</legend>
+@b4.text(productForm("ean"), '_label -> "EAN")
+@b4.text(productForm("name"), '_label -> "Name")
+@b4.textarea(productForm("description"), '_label -> "Description")
+	</fieldset>
+	<input type="submit" class="btn btn-primary" value="Save">
+	<a class="btn" href="@routes.Products.list()">Cancel</a>
+
+}
+}
+	
